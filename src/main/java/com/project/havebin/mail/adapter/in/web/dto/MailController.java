@@ -2,7 +2,6 @@ package com.project.havebin.mail.adapter.in.web.dto;
 
 import com.project.havebin.mail.adapter.in.web.dto.request.DuplicateMailReqDto;
 import com.project.havebin.mail.adapter.in.web.dto.request.EmailAuthReqDto;
-import com.project.havebin.mail.application.MailService;
 import com.project.havebin.mail.application.port.in.MailUseCase;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
