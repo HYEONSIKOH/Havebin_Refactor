@@ -28,8 +28,7 @@ public class MailAdapter implements MailSenderPort {
     private MimeMessage createMessage(String to, String code) throws Exception {
         String ePw = code;
 
-        System.out.println("보내는 대상 : " + to);
-        System.out.println("인증 번호 : " + ePw);
+        // log.info("보내는 대상 : " + to + " 인증 번호 : " + ePw);
 
         // HTML 형식의 이메일 메시지
         String msgg =

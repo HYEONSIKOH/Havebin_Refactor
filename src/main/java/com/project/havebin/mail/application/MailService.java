@@ -1,6 +1,8 @@
 package com.project.havebin.mail.application;
 
+import com.project.havebin.mail.application.port.in.MailUseCase;
 import com.project.havebin.mail.application.port.in.command.DuplicateMail;
+import com.project.havebin.mail.application.port.in.command.EmailAuth;
 import com.project.havebin.mail.application.port.out.EmailAuthPort;
 import com.project.havebin.mail.application.port.out.MailSenderPort;
 import com.project.havebin.user.application.port.out.UserRepositoryPort;
@@ -17,12 +19,12 @@ import java.util.Set;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class MailService {
+public class MailService implements MailUseCase {
     private final UserRepositoryPort userRepositoryPort;
     private final MailSenderPort mailSenderPort;
+    private final EmailAuthPort emailAuthPort;
 
     private final static int CODE_LENGTH = 4;
-    private final EmailAuthPort emailAuthPort;
 
     private static String createKey() {
         StringBuilder code = new StringBuilder();
@@ -51,6 +53,7 @@ public class MailService {
         return code.toString();
     }
 
+    @Override
     public void duplicateMail(DuplicateMail command) {
         // 중복 확인
         if (userRepositoryPort.duplicateEmail(command.email())) {
@@ -65,5 +68,12 @@ public class MailService {
 
         // Redis에 인증 코드 저장
         emailAuthPort.saveEmailAuthCode(command.email(), code);
+    }
+
+    @Override
+    public void emailAuth(EmailAuth command) {
+        if (!emailAuthPort.checkEmailAuthCode(command.email(), command.code())){
+            throw new RuntimeException("timeout");
+        }
     }
 }

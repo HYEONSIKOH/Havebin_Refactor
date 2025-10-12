@@ -3,6 +3,7 @@ package com.project.havebin.mail.adapter.in.web.dto;
 import com.project.havebin.mail.adapter.in.web.dto.request.DuplicateMailReqDto;
 import com.project.havebin.mail.adapter.in.web.dto.request.EmailAuthReqDto;
 import com.project.havebin.mail.application.MailService;
+import com.project.havebin.mail.application.port.in.MailUseCase;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -18,17 +19,18 @@ import java.util.Map;
 @AllArgsConstructor
 @Tag(name = "Mail API", description = "메일 전송 및 인증 관련 API")
 public class MailController {
-    private final MailService mailService;
+    private final MailUseCase mailUseCase;
 
     @PostMapping("/validateDuplicateUser")
     public ResponseEntity<?> duplicateMail(@Valid @RequestBody DuplicateMailReqDto dto) {
-        mailService.duplicateMail(dto.toCommand());
+        mailUseCase.duplicateMail(dto.toCommand());
         return ResponseEntity.ok("success");
     }
 
     @PostMapping("/mailAuth")
     public ResponseEntity<?> mailCodeAuth(@Valid @RequestBody EmailAuthReqDto dto) {
-        return ResponseEntity.ok("Not Implemented");
+        mailUseCase.emailAuth(dto.toCommand());
+        return ResponseEntity.ok("success");
     }
 
     //===================== [예외 처리] =====================
