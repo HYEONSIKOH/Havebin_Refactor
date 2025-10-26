@@ -32,26 +32,4 @@ public class MailController {
         mailUseCase.emailAuth(dto.toCommand());
         return ResponseEntity.ok("success");
     }
-
-    //===================== [예외 처리] =====================
-
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<?> handleRuntimeException(RuntimeException ex) {
-        return ResponseEntity
-                .badRequest()
-                .body(Map.of(
-                        "message", ex.getMessage(),
-                        "status", 400
-                ));
-    }
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<?> handleIllegalArgument(IllegalArgumentException ex) {
-        return ResponseEntity
-                .badRequest()
-                .body(Map.of(
-                        "message", ex.getMessage(),
-                        "status", 401
-                ));
-    }
 }

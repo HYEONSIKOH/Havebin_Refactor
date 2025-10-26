@@ -31,7 +31,7 @@ public class TestCaseInput implements CommandLineRunner {
     @Override
     public void run(String... args) {
         userCaseInput();
-        trashCanCaseInput();
+        //trashCanCaseInput();
     }
 
     public void userCaseInput() {
