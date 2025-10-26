@@ -51,6 +51,9 @@ public class TrashCanCustomRepositoryImpl implements TrashCanCustomRepository {
                     )
             );
         }
+
+        if (positions.isEmpty()) { return Optional.empty(); }
+
         return Optional.of(positions);
     }
 
