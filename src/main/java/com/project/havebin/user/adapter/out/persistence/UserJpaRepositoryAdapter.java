@@ -34,7 +34,7 @@ public class UserJpaRepositoryAdapter implements UserRepositoryPort {
 
     @Override
     public boolean duplicateNickname(Nickname nickname) {
-        return repository.existsByUsername(nickname);
+        return repository.existsByUsername(nickname.getValue());
     }
 
     @Override

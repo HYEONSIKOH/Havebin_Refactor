@@ -41,26 +41,33 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
 
     // Swagger
-    // implementation("org.springdoc:springdoc-openapi-starter-webflux-ui:2.0.2")
+    // implementation("org.springdoc:springdoc-openapi-starter-webflux-ui:latest.release")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
 
     // Validation (@NotNull, @Size, @Min, @Max 등)
     implementation("org.springframework.boot:spring-boot-starter-validation")
 
     // JWT
-    implementation("io.jsonwebtoken:jjwt-api:0.12.5")
-    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.5")
-    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.5")
+    implementation("io.jsonwebtoken:jjwt-api:latest.release")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:latest.release")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:latest.release")
 
     // Mockito - Test 라이브러리
     implementation("org.mockito:mockito-junit-jupiter")
 
     // AWS S3
-    implementation("io.awspring.cloud:spring-cloud-aws-starter-s3:3.1.0")
-    implementation("software.amazon.awssdk:s3:2.29.14")
+    implementation("io.awspring.cloud:spring-cloud-aws-starter-s3:latest.release")
+    implementation("software.amazon.awssdk:s3:latest.release")
 
     // Spring Boot Mail Starter
     implementation("org.springframework.boot:spring-boot-starter-mail")
+
+    // CSV Reader (테스트용)
+    implementation("com.opencsv:opencsv:latest.release")
+
+    // Tsid Creator
+    implementation("io.hypersistence:hypersistence-utils-hibernate-60:latest.release")
+    //implementation("com.github.f4b6a3:tsid-creator-jpa:5.0.0")
 }
 
 tasks.withType<Test> {

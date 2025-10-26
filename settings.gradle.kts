@@ -1,1 +1,1 @@
-rootProject.name = "havebin"
+rootProject.name = "HaveBin [V2]"

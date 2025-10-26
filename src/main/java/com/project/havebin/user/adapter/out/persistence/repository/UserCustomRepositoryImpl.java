@@ -9,6 +9,7 @@ import java.util.*;
 @Repository
 public class UserCustomRepositoryImpl implements UserCustomRepository {
     private static final List<UserJpaEntity> userTable = new ArrayList<>();
+    private static Long newId = -1L;
 
     @Override
     public List<UserJpaEntity> findAll() {
@@ -18,16 +19,29 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
     @Override
     public UserJpaEntity save(UserJpaEntity userJpaEntity) {
         if (userJpaEntity.getId() == null) {
-            Long newId = (long) (userTable.size() + 1);
+            if (newId.equals(-1L)) {
+                for (UserJpaEntity jpaEntity : userTable) {
+                    newId = Math.max(newId, jpaEntity.getId());
+                }
+            }
+
             userJpaEntity.setPK(newId);
             userTable.add(userJpaEntity);
 
             return userJpaEntity;
         } else {
+            boolean isContained = false;
             for (int i = 0; i < userTable.size(); i++) {
                 if (userTable.get(i).getId().equals(userJpaEntity.getId())) {
                     userTable.set(i, userJpaEntity);
+                    isContained = true;
+                    break;
                 }
+            }
+
+            if (!isContained) {
+                if (userJpaEntity.getId() > newId) { newId = userJpaEntity.getId(); }
+                userTable.add(userJpaEntity);
             }
 
             return userJpaEntity;
@@ -35,7 +49,7 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
     }
 
     @Override
-    public boolean existsByUsername(Nickname nickname) {
+    public boolean existsByUsername(String nickname) {
         for (UserJpaEntity user : userTable) {
             if (user.getNickname().equals(nickname)) {
                 return true;

@@ -1,7 +1,6 @@
 package com.project.havebin.user.adapter.out.persistence.entity;
 
 import com.project.havebin.user.domain.enums.RoleType;
-import com.project.havebin.user.domain.vo.*;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

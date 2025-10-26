@@ -10,7 +10,7 @@ public interface UserCustomRepository {
     List<UserJpaEntity> findAll();
 
     UserJpaEntity save(UserJpaEntity userJpaEntity);
-    boolean existsByUsername(Nickname nickname);
+    boolean existsByUsername(String nickname);
     Optional<UserJpaEntity> findById(Long id);
 
     boolean existsByEmail(String email);

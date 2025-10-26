@@ -42,3 +42,6 @@ out/
 ### yml & Properties ###
 *.yml
 *.properties
+
+### ETC ###
+*.csv
