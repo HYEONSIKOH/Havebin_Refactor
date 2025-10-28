@@ -1,16 +1,11 @@
 package com.project.havebin.trashcan.domain.vo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
 import lombok.Getter;
 
 @Getter
-@Embeddable
 public class Location {
-    @Column(name = "longitude", nullable = false)
-    private double latitude;
-    @Column(name = "longitude", nullable = false)
-    private double longitude;
+    private final double latitude;
+    private final double longitude;
 
     public Location() {
         throw new IllegalArgumentException("location information blank");

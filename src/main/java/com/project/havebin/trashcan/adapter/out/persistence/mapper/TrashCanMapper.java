@@ -2,10 +2,7 @@ package com.project.havebin.trashcan.adapter.out.persistence.mapper;
 
 import com.project.havebin.trashcan.adapter.out.persistence.entity.TrashCanJpaEntity;
 import com.project.havebin.trashcan.domain.entity.TrashCan;
-import com.project.havebin.trashcan.domain.vo.Address;
-import com.project.havebin.trashcan.domain.vo.FindDate;
-import com.project.havebin.trashcan.domain.vo.Location;
-import com.project.havebin.trashcan.domain.vo.RoadviewImagePath;
+import com.project.havebin.trashcan.domain.vo.*;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
@@ -15,6 +12,7 @@ public class TrashCanMapper {
         if (domain == null) { return null; }
 
         return TrashCanJpaEntity.builder()
+                .id(domain.getId().getValue())
                 .latitude(domain.getLocation().getLatitude())
                 .longitude(domain.getLocation().getLongitude())
                 .roadviewImgpath(domain.getRoadviewImagePath().getValue())
@@ -32,6 +30,7 @@ public class TrashCanMapper {
         if (e == null) { return null; }
 
         return TrashCan.builder()
+                .id(new TrashCanNo(e.getId()))
                 .location(new Location(e.getLatitude(), e.getLongitude()))
                 .roadviewImagePath(new RoadviewImagePath(e.getRoadviewImgpath()))
                 .findUser(null)

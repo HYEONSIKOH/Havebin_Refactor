@@ -18,10 +18,10 @@ public class TrashCan {
     private FindDate findDate;
 
     @Builder
-    public TrashCan(Location location, RoadviewImagePath roadviewImagePath,
+    public TrashCan(TrashCanNo id, Location location, RoadviewImagePath roadviewImagePath,
                     User findUser, Address address, Categories categories,
                     State state, FindDate findDate) {
-        this.id = new TrashCanNo();
+        this.id = id;
         this.location = location;
         this.roadviewImagePath = roadviewImagePath;
         this.findUser = findUser;

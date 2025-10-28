@@ -13,7 +13,7 @@ import lombok.*;
 //@Table(name = "trashcan")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TrashCanJpaEntity {
-    @Id @Tsid
+    @Id
     private Long id;
 
     @Column(nullable = false)
@@ -49,9 +49,10 @@ public class TrashCanJpaEntity {
     private State state;
 
     @Builder
-    public TrashCanJpaEntity(double latitude, double longitude, String roadviewImgpath, UserJpaEntity findUser,
+    public TrashCanJpaEntity(Long id, double latitude, double longitude, String roadviewImgpath, UserJpaEntity findUser,
                              String date, String address, String detailAddress,
                              Categories categories, State state) {
+        this.id = id;
         this.latitude = latitude;
         this.longitude = longitude;
         this.roadviewImgpath = roadviewImgpath;

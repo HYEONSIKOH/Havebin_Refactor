@@ -1,16 +1,12 @@
 package com.project.havebin.trashcan.domain.vo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
 import lombok.Getter;
 
 import java.util.Date;
 
 @Getter
-@Embeddable
 public class FindDate {
-    @Column(name = "date", unique = true)
-    private String value;
+    private final String value;
 
     public FindDate() {
         Date date = new Date();

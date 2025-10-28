@@ -1,26 +1,21 @@
 package com.project.havebin.trashcan.domain.vo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+import io.hypersistence.tsid.TSID;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.util.UUID;
 
 @Getter
-@Embeddable
 @EqualsAndHashCode(of = "value")
 public class TrashCanNo {
-    @Column(name = "external_id", unique = true)
-    private String value;
+    private final Long value;
 
-    public TrashCanNo() {
-        this.value = UUID.randomUUID().toString();
-    }
+    public TrashCanNo() { this.value = TSID.Factory.getTsid().toLong(); }
 
-    public TrashCanNo(String value) {
-        if (value == null || value.isBlank()) {
-            value = UUID.randomUUID().toString();
+    public TrashCanNo(Long value) {
+        if (value == null) {
+            throw new IllegalArgumentException("TrashCan ID is blank.");
         }
 
         this.value = value;
