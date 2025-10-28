@@ -1,6 +1,6 @@
 package com.project.havebin.trashcan.adapter.in.web.response;
 
-public record GetAllTrashCanPositionResDto(
+public record AllTrashCanPositionResDto(
         Long trashCanId,
         String roadviewImgpath,
         double latitude,

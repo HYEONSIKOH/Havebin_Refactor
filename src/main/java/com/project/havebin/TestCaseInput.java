@@ -8,9 +8,7 @@ import com.project.havebin.trashcan.adapter.out.persistence.repository.TrashCanC
 import com.project.havebin.trashcan.domain.enums.Categories;
 import com.project.havebin.trashcan.domain.enums.State;
 import com.project.havebin.user.adapter.out.persistence.entity.UserJpaEntity;
-import com.project.havebin.user.adapter.out.persistence.mapper.UserMapper;
 import com.project.havebin.user.adapter.out.persistence.repository.UserCustomRepositoryImpl;
-import com.project.havebin.user.domain.entity.User;
 import com.project.havebin.user.domain.enums.RoleType;
 import io.hypersistence.tsid.TSID;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +29,7 @@ public class TestCaseInput implements CommandLineRunner {
     @Override
     public void run(String... args) {
         userCaseInput();
-        //trashCanCaseInput();
+        trashCanCaseInput();
     }
 
     public void userCaseInput() {
@@ -105,7 +103,8 @@ public class TestCaseInput implements CommandLineRunner {
                                 .state(State.valueOf(state.toUpperCase()))
                                 .build();
 
-                trashCan.setPK(TSID.Factory.getTsid().toLong());
+                Long id = TSID.Factory.getTsid().toLong();
+                trashCan.setPK(id);
 
                 //log.info("이름={}, 주소={}. 위도={}, 경도={}", user.getNickname(), address, latitude, longitude);
                 trashCanRepository.save(trashCan);

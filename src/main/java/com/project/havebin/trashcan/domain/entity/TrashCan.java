@@ -8,10 +8,10 @@ import lombok.Getter;
 
 @Getter
 public class TrashCan {
-    private TrashCanNo id;
+    private final TrashCanNo id;
     private Location location;
     private RoadviewImagePath roadviewImagePath;
-    private User findUser;
+    private final User findUser;
     private Address address;
     private Categories categories;
     private State state;

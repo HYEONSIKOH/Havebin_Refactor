@@ -2,13 +2,20 @@ package com.project.havebin.trashcan.adapter.out.persistence.repository;
 
 import com.project.havebin.trashcan.adapter.out.persistence.entity.TrashCanJpaEntity;
 import com.project.havebin.trashcan.application.out.dto.TrashCanAllPositionQueryDto;
+import com.project.havebin.trashcan.application.out.dto.TrashCanInfoQueryDto;
+import com.project.havebin.user.adapter.out.persistence.entity.UserJpaEntity;
+import com.project.havebin.user.adapter.out.persistence.repository.UserCustomRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
 @Repository
+@RequiredArgsConstructor
 public class TrashCanCustomRepositoryImpl implements TrashCanCustomRepository {
     private final List<TrashCanJpaEntity> trashCanTable = new ArrayList<>();
+
+    private final UserCustomRepository userRepository;
 
     @Override
     public TrashCanJpaEntity save(TrashCanJpaEntity trashCanJpaEntity) {
@@ -55,6 +62,29 @@ public class TrashCanCustomRepositoryImpl implements TrashCanCustomRepository {
         if (positions.isEmpty()) { return Optional.empty(); }
 
         return Optional.of(positions);
+    }
+
+    @Override
+    public Optional<TrashCanInfoQueryDto> findTrashCanInfoById(Long id) {
+        for (TrashCanJpaEntity trashCan : trashCanTable) {
+            if (trashCan.getId().equals(id)) {
+                // 없으면 "Unknown User"
+                UserJpaEntity finduser = userRepository.findById(trashCan.getFindUser().getId())
+                        .orElseGet(null);
+
+                TrashCanInfoQueryDto infoDto = new TrashCanInfoQueryDto(
+                        finduser == null ? "Unknown User" : finduser.getNickname(),
+                        trashCan.getRoadviewImgpath(),
+                        trashCan.getAddress(),
+                        trashCan.getDetailAddress(),
+                        trashCan.getCategories().name()
+                );
+
+                return Optional.of(infoDto);
+            }
+        }
+
+        return Optional.empty();
     }
 
     @Override

@@ -42,4 +42,8 @@ public class User {
         this.password = password;
         return this;
     }
+
+    public void updateNickname(Nickname nickname) {
+        this.nickname = nickname;
+    }
 }

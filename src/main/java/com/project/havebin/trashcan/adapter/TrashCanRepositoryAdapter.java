@@ -5,7 +5,9 @@ import com.project.havebin.trashcan.adapter.out.persistence.mapper.TrashCanMappe
 import com.project.havebin.trashcan.adapter.out.persistence.repository.TrashCanCustomRepository;
 import com.project.havebin.trashcan.application.out.TrashCanRepositoryPort;
 import com.project.havebin.trashcan.application.out.dto.TrashCanAllPositionQueryDto;
+import com.project.havebin.trashcan.application.out.dto.TrashCanInfoQueryDto;
 import com.project.havebin.trashcan.domain.entity.TrashCan;
+import com.project.havebin.trashcan.domain.vo.TrashCanNo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -35,6 +37,11 @@ public class TrashCanRepositoryAdapter implements TrashCanRepositoryPort {
     @Override
     public Optional<List<TrashCanAllPositionQueryDto>> findAllPositions() {
         return repository.findAllPositions();
+    }
+
+    @Override
+    public Optional<TrashCanInfoQueryDto> getTrashCanInfoById(Long id) {
+        return repository.findTrashCanInfoById(id);
     }
 
 //    @Override
