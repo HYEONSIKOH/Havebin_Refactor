@@ -26,7 +26,7 @@ public class TrashCanController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/info/{trashCanId}")
+    @GetMapping("/{trashCanId}")
     public ResponseEntity<?> getTrashCanInfo(@PathVariable Long trashCanId) {
         TrashCanInfoResDto response = trashCanUseCase.getTrashCanInfoById(trashCanId);
         return ResponseEntity.ok(response);
