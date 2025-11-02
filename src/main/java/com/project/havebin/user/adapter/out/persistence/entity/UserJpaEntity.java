@@ -7,33 +7,33 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-//@Entity
+@Entity
 @Getter
-//@Table(name = "user")
+@Table(name = "user")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserJpaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Embedded
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @Embedded
-    private String nickname;
-
-    @Embedded
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Embedded
+    @Column(name = "nickname", unique = true, nullable = false)
+    private String nickname;
+
+    @Column(name = "profile_image_path")
     private String profileImagePath;
 
-    @Embedded
+    @Column(name = "role_type")
     private RoleType roleType;
 
     @Builder
-    public UserJpaEntity(String email, String nickname, String password, String profileImagePath, RoleType roleType) {
+    public UserJpaEntity(Long id, String email, String nickname, String password, String profileImagePath, RoleType roleType) {
+        this.id = id;
         this.email = email;
         this.nickname = nickname;
         this.password = password;

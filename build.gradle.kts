@@ -68,6 +68,14 @@ dependencies {
     // Tsid Creator
     implementation("io.hypersistence:hypersistence-utils-hibernate-60:latest.release")
     //implementation("com.github.f4b6a3:tsid-creator-jpa:5.0.0")
+
+    //QueryDSL 추가
+    implementation ("com.querydsl:querydsl-apt:5.0.0")
+    implementation ("com.querydsl:querydsl-jpa:5.0.0:jakarta")
+    implementation ("com.querydsl:querydsl-core:5.0.0")
+    annotationProcessor ("com.querydsl:querydsl-apt:5.0.0:jakarta")
+    annotationProcessor ("jakarta.annotation:jakarta.annotation-api")
+    annotationProcessor ("jakarta.persistence:jakarta.persistence-api")
 }
 
 tasks.withType<Test> {
@@ -76,4 +84,21 @@ tasks.withType<Test> {
 
 tasks.bootJar {
     archiveFileName.set("havebin.jar")
+}
+
+// Querydsl 빌드 옵션 설정
+val generatedDir = "src/main/generated"
+
+// querydsl QClass 파일 생성 위치를 지정
+tasks.withType<JavaCompile> {
+    options.generatedSourceOutputDirectory.set(file(generatedDir))
+}
+
+// java source set에 querydsl QClass 위치 추가
+sourceSets {
+    getByName("main") {
+        java {
+            srcDir(generatedDir)
+        }
+    }
 }

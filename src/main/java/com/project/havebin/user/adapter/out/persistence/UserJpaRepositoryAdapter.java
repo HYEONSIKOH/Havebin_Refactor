@@ -3,6 +3,7 @@ package com.project.havebin.user.adapter.out.persistence;
 import com.project.havebin.user.adapter.out.persistence.entity.UserJpaEntity;
 import com.project.havebin.user.adapter.out.persistence.mapper.UserMapper;
 import com.project.havebin.user.adapter.out.persistence.repository.UserCustomRepository;
+import com.project.havebin.user.adapter.out.persistence.repository.UserRepository;
 import com.project.havebin.user.application.port.out.UserRepositoryPort;
 import com.project.havebin.user.domain.entity.User;
 import com.project.havebin.user.domain.vo.Email;
@@ -19,17 +20,14 @@ import java.util.Optional;
 public class UserJpaRepositoryAdapter implements UserRepositoryPort {
     //private final UserRepository repository;
     private final UserCustomRepository repository;
+    private final UserRepository userRepository;
 
     @Override
     public User save(User user) {
         UserJpaEntity userJpaEntity = UserMapper.toJpa(user);
+        userRepository.save(userJpaEntity);
 
-//        List<UserJpaEntity> users= repository.findAll();
-//        for (UserJpaEntity u : users) {
-//            log.info(u.getId() + " " + u.getExternalId().getValue() + " " + u.getEmail().getValue() + " " + u.getPassword().getValue() + " " + u.getNickname().getValue());
-//        }
-
-        return UserMapper.toDomain(repository.save(userJpaEntity));
+        return UserMapper.toDomain(userRepository.save(userJpaEntity));
     }
 
     @Override
