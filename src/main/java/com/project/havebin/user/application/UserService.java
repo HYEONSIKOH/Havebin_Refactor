@@ -9,7 +9,6 @@ import com.project.havebin.user.application.port.in.response.DuplicateNicknameRe
 import com.project.havebin.user.application.port.in.response.RegisterUserResponse;
 import com.project.havebin.user.application.port.out.UserRepositoryPort;
 import com.project.havebin.user.domain.entity.User;
-import com.project.havebin.user.domain.vo.Password;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,9 +54,9 @@ public class UserService implements UserUseCase {
         }
 
         return new GetUserDataResDto(
-                user.getEmail().getValue(),
-                user.getNickname().getValue(),
-                user.getProfileImagePath().getValue(),
+                user.getEmail().value(),
+                user.getNickname().value(),
+                user.getProfileImagePath().value(),
                 user.getRoleType().name()
         );
     }

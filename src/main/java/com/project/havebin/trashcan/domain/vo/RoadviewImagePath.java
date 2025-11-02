@@ -1,14 +1,11 @@
 package com.project.havebin.trashcan.domain.vo;
 
-import lombok.Getter;
+public record RoadviewImagePath(String value) {
+    public RoadviewImagePath() { this(null); }
 
-@Getter
-public class RoadviewImagePath {
-    private final String value;
-
-    public RoadviewImagePath() { throw new IllegalArgumentException("Roadview link blank"); }
-
-    public RoadviewImagePath(String value) {
-        this.value = value;
+    public RoadviewImagePath {
+        if (value == null || value.isBlank()) {
+            throw new IllegalArgumentException("Roadview image is blank.");
+        }
     }
 }

@@ -12,16 +12,16 @@ public class TrashCanMapper {
         if (domain == null) { return null; }
 
         return TrashCanJpaEntity.builder()
-                .id(domain.getId().getValue())
-                .latitude(domain.getLocation().getLatitude())
-                .longitude(domain.getLocation().getLongitude())
-                .roadviewImgpath(domain.getRoadviewImagePath().getValue())
+                .id(domain.getId().value())
+                .latitude(domain.getLocation().latitude())
+                .longitude(domain.getLocation().longitude())
+                .imageFileName(domain.getRoadviewImagePath().value())
                 .findUser(null)
-                .address(domain.getAddress().getRoadAddress())
-                .detailAddress(domain.getAddress().getDetailAddress())
+                .roadAddress(domain.getAddress().roadAddress())
+                .detailAddress(domain.getAddress().detailAddress())
                 .state(domain.getState())
                 .categories(domain.getCategories())
-                .date(domain.getFindDate().getValue())
+                .date(domain.getFindDate().value())
                 .build();
     }
 
@@ -32,9 +32,9 @@ public class TrashCanMapper {
         return TrashCan.builder()
                 .id(new TrashCanNo(e.getId()))
                 .location(new Location(e.getLatitude(), e.getLongitude()))
-                .roadviewImagePath(new RoadviewImagePath(e.getRoadviewImgpath()))
+                .roadviewImagePath(new RoadviewImagePath(e.getImageFileName()))
                 .findUser(null)
-                .address(new Address(null, e.getAddress(), e.getDetailAddress()))
+                .address(new Address(null, e.getRoadAddress(), e.getDetailAddress()))
                 .categories(e.getCategories())
                 .state(e.getState())
                 .findDate(new FindDate(e.getDate()))

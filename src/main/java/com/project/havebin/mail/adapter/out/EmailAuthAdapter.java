@@ -19,12 +19,12 @@ public class EmailAuthAdapter implements EmailAuthPort {
     @Override
     public void saveEmailAuthCode(Email email, String code) {
         //log.info("save email auth code: {}", code);
-        redisTemplate.opsForValue().set(email.getValue(), code, 300, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(email.value(), code, 300, TimeUnit.SECONDS);
     }
 
     @Override
     public boolean checkEmailAuthCode(Email email, String code) {
-        String storedCode = redisTemplate.opsForValue().get(email.getValue());
+        String storedCode = redisTemplate.opsForValue().get(email.value());
         //log.info("check email auth code: {}, stored code: {}", code, storedCode);
         return code.equals(storedCode);
     }

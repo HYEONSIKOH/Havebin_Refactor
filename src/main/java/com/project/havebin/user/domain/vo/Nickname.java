@@ -1,22 +1,9 @@
 package com.project.havebin.user.domain.vo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+public record Nickname(String value) {
+    public Nickname() { this(null); }
 
-@Getter
-@Embeddable
-@EqualsAndHashCode(of = "value")
-public class Nickname {
-    @Column(name = "nickname", unique = true, nullable = false)
-    private String value;
-
-    public Nickname() {
-        throw new IllegalArgumentException("Nickname blank");
-    }
-
-    public Nickname(String value) {
+    public Nickname {
         if (value == null || value.isBlank()) {
             throw new IllegalArgumentException("Nickname blank");
         }
@@ -25,6 +12,5 @@ public class Nickname {
             throw new IllegalArgumentException("Invalid email format");
         }
 
-        this.value = value;
     }
 }

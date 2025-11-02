@@ -1,20 +1,9 @@
 package com.project.havebin.user.domain.vo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-import lombok.Getter;
+public record Email(String value) {
+    public Email() { this(null); }
 
-@Embeddable
-@Getter
-public class Email {
-    @Column(name = "email", unique = true, nullable = false)
-    private String value;
-
-    public Email() {
-        throw new IllegalArgumentException("email blank");
-    }
-
-    public Email(String value) {
+    public Email {
         if (value == null || value.isBlank()) {
             throw new IllegalArgumentException("email blank");
         }
@@ -25,6 +14,5 @@ public class Email {
             throw new IllegalArgumentException("Invalid email format");
         }
 
-        this.value = value;
     }
 }

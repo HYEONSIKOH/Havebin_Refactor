@@ -32,7 +32,7 @@ public class UserJpaRepositoryAdapter implements UserRepositoryPort {
 
     @Override
     public boolean duplicateNickname(Nickname nickname) {
-        return repository.existsByUsername(nickname.getValue());
+        return repository.existsByUsername(nickname.value());
     }
 
     @Override
@@ -46,7 +46,7 @@ public class UserJpaRepositoryAdapter implements UserRepositoryPort {
 
     @Override
     public boolean duplicateEmail(Email email) {
-        if (repository.existsByEmail(email.getValue())) {
+        if (repository.existsByEmail(email.value())) {
             return true;
         }
 

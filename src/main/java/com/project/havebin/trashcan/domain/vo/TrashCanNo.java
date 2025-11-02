@@ -1,23 +1,15 @@
 package com.project.havebin.trashcan.domain.vo;
 
 import io.hypersistence.tsid.TSID;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
-import java.util.UUID;
+public record TrashCanNo(Long value) {
+    public TrashCanNo() {
+        this(TSID.Factory.getTsid().toLong());
+    }
 
-@Getter
-@EqualsAndHashCode(of = "value")
-public class TrashCanNo {
-    private final Long value;
-
-    public TrashCanNo() { this.value = TSID.Factory.getTsid().toLong(); }
-
-    public TrashCanNo(Long value) {
+    public TrashCanNo {
         if (value == null) {
             throw new IllegalArgumentException("TrashCan ID is blank.");
         }
-
-        this.value = value;
     }
 }

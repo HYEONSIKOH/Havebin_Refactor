@@ -54,7 +54,7 @@ public class TrashCanCustomRepositoryImpl implements TrashCanCustomRepository {
         for (TrashCanJpaEntity trashCan : trashCanTable) {
             positions.add(
                     new TrashCanAllPositionQueryDto(
-                            trashCan.getId(), trashCan.getRoadviewImgpath(), trashCan.getLatitude(), trashCan.getLongitude()
+                            trashCan.getId(), trashCan.getImageFileName(), trashCan.getLatitude(), trashCan.getLongitude()
                     )
             );
         }
@@ -74,8 +74,8 @@ public class TrashCanCustomRepositoryImpl implements TrashCanCustomRepository {
 
                 TrashCanInfoQueryDto infoDto = new TrashCanInfoQueryDto(
                         finduser == null ? "Unknown User" : finduser.getNickname(),
-                        trashCan.getRoadviewImgpath(),
-                        trashCan.getAddress(),
+                        trashCan.getImageFileName(),
+                        trashCan.getRoadAddress(),
                         trashCan.getDetailAddress(),
                         trashCan.getCategories().name()
                 );

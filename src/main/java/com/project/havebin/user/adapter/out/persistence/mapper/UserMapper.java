@@ -15,10 +15,10 @@ public class UserMapper {
         if (domain == null) { return null; }
 
         return UserJpaEntity.builder()
-                .email(domain.getEmail().getValue())
-                .nickname(domain.getNickname().getValue())
-                .password(domain.getPassword().getValue())
-                .profileImagePath(domain.getProfileImagePath().getValue())
+                .email(domain.getEmail().value())
+                .nickname(domain.getNickname().value())
+                .password(domain.getPassword().value())
+                .profileImagePath(domain.getProfileImagePath().value())
                 .roleType(domain.getRoleType())
                 .build();
     }

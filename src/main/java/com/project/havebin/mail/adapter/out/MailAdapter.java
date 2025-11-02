@@ -70,7 +70,7 @@ public class MailAdapter implements MailSenderPort {
         MimeMessage message = null;
 
         try {
-            message = createMessage(email.getValue(), code);
+            message = createMessage(email.value(), code);
         } catch (Exception e) {
             log.info("메일 생성 실패 : " + e.getMessage());
             return false;
