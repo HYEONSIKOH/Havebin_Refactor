@@ -3,8 +3,10 @@ package com.project.havebin.trashcan.adapter.out.persistence.repository;
 import com.project.havebin.trashcan.adapter.out.persistence.entity.TrashCanJpaEntity;
 import com.project.havebin.trashcan.application.out.dto.TrashCanAllPositionQueryDto;
 import com.project.havebin.trashcan.application.out.dto.TrashCanInfoQueryDto;
+import com.project.havebin.user.adapter.out.persistence.UserJpaRepositoryAdapter;
 import com.project.havebin.user.adapter.out.persistence.entity.UserJpaEntity;
-import com.project.havebin.user.adapter.out.persistence.repository.UserCustomRepository;
+import com.project.havebin.user.adapter.out.persistence.repository.UserRepository;
+import com.project.havebin.user.adapter.out.persistence.repository.UserRepositoryCustom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +17,7 @@ import java.util.*;
 public class TrashCanCustomRepositoryImpl implements TrashCanCustomRepository {
     private final List<TrashCanJpaEntity> trashCanTable = new ArrayList<>();
 
-    private final UserCustomRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public TrashCanJpaEntity save(TrashCanJpaEntity trashCanJpaEntity) {
@@ -69,8 +71,9 @@ public class TrashCanCustomRepositoryImpl implements TrashCanCustomRepository {
         for (TrashCanJpaEntity trashCan : trashCanTable) {
             if (trashCan.getId().equals(id)) {
                 // 없으면 "Unknown User"
-                UserJpaEntity finduser = userRepository.findById(trashCan.getFindUser().getId())
-                        .orElseGet(null);
+                UserJpaEntity finduser = userRepository
+                        .findById(trashCan.getFindUser().getId())
+                        .orElse(null);
 
                 TrashCanInfoQueryDto infoDto = new TrashCanInfoQueryDto(
                         finduser == null ? "Unknown User" : finduser.getNickname(),

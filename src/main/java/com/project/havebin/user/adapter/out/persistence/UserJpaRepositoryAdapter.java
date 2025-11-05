@@ -2,7 +2,6 @@ package com.project.havebin.user.adapter.out.persistence;
 
 import com.project.havebin.user.adapter.out.persistence.entity.UserJpaEntity;
 import com.project.havebin.user.adapter.out.persistence.mapper.UserMapper;
-import com.project.havebin.user.adapter.out.persistence.repository.UserCustomRepository;
 import com.project.havebin.user.adapter.out.persistence.repository.UserRepository;
 import com.project.havebin.user.application.port.out.UserRepositoryPort;
 import com.project.havebin.user.domain.entity.User;
@@ -18,8 +17,6 @@ import java.util.Optional;
 @Repository
 @RequiredArgsConstructor
 public class UserJpaRepositoryAdapter implements UserRepositoryPort {
-    //private final UserRepository repository;
-    private final UserCustomRepository repository;
     private final UserRepository userRepository;
 
     @Override
@@ -32,24 +29,20 @@ public class UserJpaRepositoryAdapter implements UserRepositoryPort {
 
     @Override
     public boolean duplicateNickname(Nickname nickname) {
-        return repository.existsByUsername(nickname.value());
+        return userRepository.existsByNickname(nickname.value());
     }
 
     @Override
     public User getUserDataById(Long id) {
-        Optional<UserJpaEntity> userJpaEntityOptional = repository.findById(id);
+        Optional<UserJpaEntity> userJpaEntityOptional = userRepository.findById(id);
 
         return userJpaEntityOptional
-                .map(entity -> UserMapper.toDomain(entity))
+                .map(UserMapper::toDomain)
                 .orElse(null);
     }
 
     @Override
     public boolean duplicateEmail(Email email) {
-        if (repository.existsByEmail(email.value())) {
-            return true;
-        }
-
-        return false;
+        return userRepository.existsByEmail(email.value());
     }
 }

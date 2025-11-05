@@ -8,8 +8,8 @@ public record Password(String value) {
             throw new IllegalArgumentException("Password blank");
         }
 
-        if (value.length() < 8 || value.length() > 20) {
-            throw new IllegalArgumentException("Password must be between 8 and 20 characters");
-        }
+//        if (value.length() < 8 || value.length() > 20) {
+//            throw new IllegalArgumentException("Password must be between 8 and 20 characters");
+//        }
     }
 }

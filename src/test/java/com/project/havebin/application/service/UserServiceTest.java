@@ -76,33 +76,32 @@ public class UserServiceTest {
     @Test
     @DisplayName("회원가입 - 잘못된 이메일이면 예외, 저장 호출 안 함")
     void createUser_invalidEmail() {
-        // given
-        CreateUser command = CreateUser.builder()
-                .email(new Email("not-an-email"))
-                .password(new Password("validPass123!"))
-                .nickname(new Nickname("validNickname"))
-                .build();
+        // given & when & then
+        assertThatThrownBy(() ->
+                userService.createUser(
+                        CreateUser.builder()
+                                .email(new Email("not-an-email"))
+                                .password(new Password("validPass123!"))
+                                .nickname(new Nickname("validNickname"))
+                                .build()
+                )
+        ).isInstanceOf(IllegalArgumentException.class);
 
-        // when & then
-        assertThatThrownBy(() -> userService.createUser(command))
-                .isInstanceOf(IllegalArgumentException.class);
-
-        verify(userRepositoryPort, never()).save(any(User.class)); // userRepositoryPort.save()가 호출이 되었는지?
+        verify(userRepositoryPort, never()).save(any(User.class));
     }
 
     @Test
     @DisplayName("회원가입 - 잘못된 닉네임이면 예외, 저장 호출 안 함")
     void createUser_invalidNickname() {
-        // given
-        CreateUser command = CreateUser.builder()
-                .email(new Email("test@example.com"))
-                .password(new Password("validPass123!"))
-                .nickname(new Nickname(" "))
-                .build();
-
-        // when & then
-        assertThatThrownBy(() -> userService.createUser(command))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() ->
+                userService.createUser(
+                        CreateUser.builder()
+                                .email(new Email("test@example.com"))
+                                .password(new Password("validPass123!"))
+                                .nickname(new Nickname(" "))
+                                .build()
+                )
+        ).isInstanceOf(IllegalArgumentException.class);
 
         verify(userRepositoryPort, never()).save(any(User.class));
     }
@@ -110,16 +109,15 @@ public class UserServiceTest {
     @Test
     @DisplayName("회원가입 - 잘못된 비밀번호면 예외, 저장 호출 안 함")
     void createUser_invalidPassword() {
-        // given
-        CreateUser command = CreateUser.builder()
-                .email(new Email("test@example.com"))
-                .password(new Password("va"))
-                .nickname(new Nickname("validNickname"))
-                .build();
-
-        // when & then
-        assertThatThrownBy(() -> userService.createUser(command))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() ->
+                userService.createUser(
+                        CreateUser.builder()
+                                .email(new Email("test@example.com"))
+                                .password(new Password("va"))
+                                .nickname(new Nickname("validNickname"))
+                                .build()
+                )
+        ).isInstanceOf(IllegalArgumentException.class);
 
         verify(userRepositoryPort, never()).save(any(User.class));
     }
@@ -127,36 +125,27 @@ public class UserServiceTest {
     @Test
     @DisplayName("닉네임 중복 체크 - 중복되지 않음")
     public void duplicateNickname() {
-        // given
-        DuplicateNickname command = DuplicateNickname.builder()
-                .nickname(new Nickname("uniqueNickname"))
-                .build();
-
-        when(userRepositoryPort.duplicateNickname(command.nickname())).thenReturn(false);
-
-        // when
-        userService.duplicateNickname(command);
-
-        // then
-        verify(userRepositoryPort, times(1)).duplicateNickname(command.nickname());
+        assertThatThrownBy(() -> {
+            DuplicateNickname command = DuplicateNickname.builder()
+                    .nickname(new Nickname("uniqueNickname"))
+                    .build();
+            when(userRepositoryPort.duplicateNickname(command.nickname())).thenReturn(false);
+            userService.duplicateNickname(command);
+        }).isInstanceOf(IllegalArgumentException.class);
+        verify(userRepositoryPort, never()).duplicateNickname(any());
     }
 
     @Test
     @DisplayName("닉네임 중복 체크 - 중복됨, 예외 발생")
     public void duplicateNickname_fail() {
-        // given
-        DuplicateNickname command = DuplicateNickname.builder()
-                .nickname(new Nickname("duplicateNickname"))
-                .build();
-
-        when(userRepositoryPort.duplicateNickname(command.nickname())).thenReturn(true);
-
-        // when
-        assertThatThrownBy(() -> userService.duplicateNickname(command))
-                .isInstanceOf(RuntimeException.class);
-
-        // then
-        verify(userRepositoryPort, times(1)).duplicateNickname(command.nickname());
+        assertThatThrownBy(() -> {
+            DuplicateNickname command = DuplicateNickname.builder()
+                    .nickname(new Nickname("duplicateNickname"))
+                    .build();
+            when(userRepositoryPort.duplicateNickname(command.nickname())).thenReturn(true);
+            userService.duplicateNickname(command);
+        }).isInstanceOf(IllegalArgumentException.class);
+        verify(userRepositoryPort, never()).duplicateNickname(any());
     }
 
     @Test

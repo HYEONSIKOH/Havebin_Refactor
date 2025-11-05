@@ -42,7 +42,7 @@ public class UserController {
     @GetMapping("/")
     @Operation(summary = "유저 정보 조회", description = "(로그인 기능 미완성) 임시로 1번 유저만 조회")
     public ResponseEntity<?> getUserData(/*@AuthenticationPrincipal Long id*/) {
-        Long id = 1L; // 로그인 기능 미완성
+        Long id = 772782407123398901L; // 로그인 기능 미완성
         return ResponseEntity.ok(userUseCase.getUserData(new GetUserData(id)));
     }
 }

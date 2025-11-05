@@ -35,6 +35,4 @@ jobs:
 
       - name: Run tests - server (서버 테스트 실행)
         run: |
-          pwd
-          ls -al
           ./gradlew test

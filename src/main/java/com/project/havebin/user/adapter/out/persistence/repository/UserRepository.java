@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
-public interface UserRepository extends JpaRepository<UserJpaEntity, Long> {
+public interface UserRepository extends JpaRepository<UserJpaEntity, Long>, UserRepositoryCustom {
 }
