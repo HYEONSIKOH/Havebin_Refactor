@@ -33,6 +33,8 @@ jobs:
         run: |
           chmod +x ./gradlew
 
-      - name: Run tests - default server (서버 테스트 실행)
+      - name: Run tests - server (서버 테스트 실행)
         run: |
+          pwd
+          ls -al
           ./gradlew test
