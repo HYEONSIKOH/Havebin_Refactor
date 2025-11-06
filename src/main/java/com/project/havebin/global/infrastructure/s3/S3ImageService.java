@@ -19,7 +19,7 @@ import java.util.UUID;
 public class S3ImageService {
     private final S3Client s3;
 
-    @Value("${cloud.aws.s3.bucket}")
+    @Value("${spring.cloud.aws.s3.bucket}")
     private String bucketName;
 
     // 원본 이미지 이름에 붙일 랜덤 UUID를 생성하는 메소드 (이름 중복 방지)
