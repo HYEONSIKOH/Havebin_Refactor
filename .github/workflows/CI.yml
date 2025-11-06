@@ -22,7 +22,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Create application.properties from git secret (application.yml 파일 생성)
+      - name: Create application.yml from git secret (application.yml 파일 생성)
         run: |
           mkdir -p src/main/resources
           echo "$APPLICATION" > src/main/resources/application.yml
@@ -44,4 +44,4 @@ jobs:
 
       - name: Run tests - server (서버 테스트 실행)
         run: |
-          ./gradlew test -i
+          ./gradlew test
