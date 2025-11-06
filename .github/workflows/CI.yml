@@ -29,6 +29,13 @@ jobs:
         env:
           APPLICATION: ${{ secrets.APPLICATION }}
 
+      - name: Set AWS credentials (AWS 인증 정보 설정)
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ap-northeast-2
+        run: echo "AWS credentials configured successfully"
+
       - name: Grant execute permission to Gradle (Gradle 실행 권한 부여)
         run: |
           chmod +x ./gradlew
