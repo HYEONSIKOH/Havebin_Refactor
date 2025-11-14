@@ -4,17 +4,14 @@ import com.project.havebin.trashcan.adapter.in.web.response.AllTrashCanPositionR
 import com.project.havebin.trashcan.adapter.in.web.response.TrashCanInfoResDto;
 import com.project.havebin.trashcan.application.in.TrashCanUseCase;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/api/trashcan")
 @Tag(name = "TrashCan API", description = "쓰레기통 관련 API")
 public class TrashCanController {
